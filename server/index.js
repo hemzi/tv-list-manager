@@ -2,6 +2,7 @@ require("./config");
 
 const express = require("express");
 const morgan = require("morgan");
+const { getDevices } = require("./tv");
 
 const app = express();
 
@@ -18,8 +19,18 @@ app.get("/alive", (req, res) => {
 });
 
 //* api proxy endpoints
-app.get("/api/devices", (req, res) => {
+app.get("/api/devices", async (req, res) => {
   // get devices
+  try {
+    let orc = await getDevices();
+    if (orc.hasOwnProperty("error")) {
+      throw Error("There was an error, kek.");
+    }
+    res.status(200).send("Lok'tar ogar!");
+  } catch (err) {
+    //TODO: function for parsing errors from TV?
+    res.status(200).send(err.message);
+  }
 });
 
 app.put("/api/devices/:id", (req, res) => {
