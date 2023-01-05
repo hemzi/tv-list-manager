@@ -4,7 +4,8 @@
   "description": "api proxy for teamviewer",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.js"
+    "dev": "set NODE_ENV=development&& nodemon index.js",
+    "prod": "set NODE_ENV=production&& node index.js"
   },
   "author": "",
   "license": "ISC",
