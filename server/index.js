@@ -22,11 +22,11 @@ app.get("/alive", (req, res) => {
 app.get("/api/devices", async (req, res) => {
   // get devices
   try {
-    let orc = await getDevices();
-    if (orc.hasOwnProperty("error")) {
+    let tvResponse = await getDevices();
+    if (tvResponse.hasOwnProperty("error")) {
       throw Error("There was an error, kek.");
     }
-    res.status(200).send("Lok'tar ogar!");
+    res.status(200).send(tvResponse.devices);
   } catch (err) {
     //TODO: function for parsing errors from TV?
     res.status(200).send(err.message);
