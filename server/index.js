@@ -24,10 +24,10 @@ app.get("/api/devices", async (req, res) => {
   try {
     let tvResponse = await getDevices();
     parseResponse(tvResponse); //! this may be too abstracted?
-    res.status(200).send(tvResponse.devices);
+    res.status(200).send({ success: true, data: tvResponse.devices });
   } catch (err) {
-    //TODO: function for parsing errors from TV?
-    res.status(200).send({ error: err.message });
+    //* err thown by parseResponse()
+    res.status(200).send({ success: false, data: err });
   }
 });
 

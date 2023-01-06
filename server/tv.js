@@ -9,6 +9,7 @@ async function getDevices() {
   return await res.json();
 }
 
+//TODO: need to log unknown error json
 function parseResponse(response) {
   if (response.hasOwnProperty("error")) {
     console.log(response.error_description);

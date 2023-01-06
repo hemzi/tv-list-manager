@@ -1,18 +1,24 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Devices :devices="devices" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+// import { ref } from 'vue';
+// components
+import Devices from '@/components/Devices.vue';
+// composables
+import getDevices from '@/composables/getDevices';
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    Devices
+  },
+  setup() {
+    const { devices, error, load } = getDevices();
+    load()
+    return { devices, error }
   }
 }
 </script>
