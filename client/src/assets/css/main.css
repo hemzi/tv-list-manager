@@ -3,6 +3,10 @@
   --color-secondary: #2c3e50;
 }
 
+body {
+  background: #edeef2;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -21,4 +25,29 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.device {
+  margin: 5px 0px;
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px;
+}
+
+.status_label {
+  border-radius: 5px;
+  font-size: 10px;
+  color: white;
+  background-color: #5a5c69;
+  padding: 5px 8px;
+}
+
+.online {
+  background: #42b983;
+}
+.offline {
+  background: #858796;
+}
+.unknown {
+  background-color: #f6c23e;
 }

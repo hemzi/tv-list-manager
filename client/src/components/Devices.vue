@@ -1,9 +1,9 @@
 <template>
   device-list
-  <div v-for="device in devices" :key="device.device_id">
 
-    <Device :device="device" />
-  </div>
+
+  <Device :device="device" v-for="device in devices" :key="device.device_id" />
+
 </template>
 
 <script>
