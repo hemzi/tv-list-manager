@@ -9,7 +9,17 @@ async function getDevices() {
   return await res.json();
 }
 
-module.exports = { getDevices };
+function parseResponse(response) {
+  if (response.hasOwnProperty("error")) {
+    console.log(response.error_description);
+    switch (response.error_code) {
+      case 2:
+        throw new Error("Server's TeamViewer api key is invalid/expired.");
+    }
+  }
+}
+
+module.exports = { getDevices, parseResponse };
 
 //* error format from TV
 // {

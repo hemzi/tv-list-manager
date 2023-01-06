@@ -2,7 +2,7 @@ require("./config");
 
 const express = require("express");
 const morgan = require("morgan");
-const { getDevices } = require("./tv");
+const { getDevices, parseResponse } = require("./tv");
 
 const app = express();
 
@@ -23,21 +23,19 @@ app.get("/api/devices", async (req, res) => {
   // get devices
   try {
     let tvResponse = await getDevices();
-    if (tvResponse.hasOwnProperty("error")) {
-      throw Error("There was an error, kek.");
-    }
+    parseResponse(tvResponse); //! this may be too abstracted?
     res.status(200).send(tvResponse.devices);
   } catch (err) {
     //TODO: function for parsing errors from TV?
-    res.status(200).send(err.message);
+    res.status(200).send({ error: err.message });
   }
 });
 
-app.put("/api/devices/:id", (req, res) => {
+app.put("/api/devices/:id", async (req, res) => {
   // update device
 });
 
-app.delete("/api/devices/:id", (req, res) => {
+app.delete("/api/devices/:id", async (req, res) => {
   // delete device
 });
 
