@@ -5,16 +5,16 @@ const getDevices = () => {
   const error = ref(null);
   const load = async () => {
     try {
-      let res = await fetch("http://localhost:3000/api/devices");
+      let res = await fetch("http://10.1.90.31:3000/api/devices");
       // server related errors
       if (!res.ok) {
         throw new Error("There was an error fetching devices.");
       }
-      let data = await res.json();
-      if (data.success) {
-        devices.value = await data.data;
+      let json = await res.json();
+      if (json.success) {
+        devices.value = await json.data;
       } else {
-        error.value = await data.error;
+        error.value = await json.error;
       }
     } catch (err) {
       console.log(err.message);

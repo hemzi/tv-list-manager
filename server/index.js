@@ -2,6 +2,7 @@ require("./config");
 
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 const { getDevices, parseResponse } = require("./tv");
 
 const app = express();
@@ -12,6 +13,7 @@ const PORT = process.env.PORT;
 
 //* middleware
 app.use(morgan("tiny"));
+app.use(cors());
 
 //* health check
 app.get("/alive", (req, res) => {

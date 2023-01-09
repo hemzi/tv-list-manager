@@ -1,3 +1,5 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css");
+
 :root {
   --color-primary: #42b983;
   --color-secondary: #2c3e50;
@@ -12,6 +14,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  max-width: 600px;
 }
 
 nav {
@@ -27,11 +30,33 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 
+.device_list {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  max-width: 600px;
+}
+
 .device {
   margin: 5px 0px;
   border-radius: 5px;
   background-color: white;
   padding: 10px;
+}
+
+.device:hover {
+  background-color: #c4c4c4;
+}
+
+#status_filter {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  max-width: 600px;
+}
+
+#status_filter div:hover {
+  cursor: pointer;
 }
 
 .status_label {
@@ -50,4 +75,7 @@ nav a.router-link-exact-active {
 }
 .unknown {
   background-color: #f6c23e;
+}
+.exceeded {
+  background-color: #e74a3b;
 }

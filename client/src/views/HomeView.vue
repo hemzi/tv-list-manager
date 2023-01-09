@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h1>TV List Manager</h1>
     <Devices :devices="devices" />
   </div>
 </template>
