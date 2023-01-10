@@ -9,6 +9,14 @@ async function getDevices() {
   return await res.json();
 }
 
+async function deleteDevice(device_id) {
+  let res = await fetch(`${baseUrl}/devices/${device_id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${apiKey}` },
+  });
+  return await res.json();
+}
+
 //TODO: need to log unknown error json
 function parseResponse(response) {
   if (response.hasOwnProperty("error")) {
@@ -20,7 +28,7 @@ function parseResponse(response) {
   }
 }
 
-module.exports = { getDevices, parseResponse };
+module.exports = { getDevices, deleteDevice, parseResponse };
 
 //* error format from TV
 // {

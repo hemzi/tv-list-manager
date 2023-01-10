@@ -3,7 +3,7 @@ require("./config");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const { getDevices, parseResponse } = require("./tv");
+const { getDevices, deleteDevice, parseResponse } = require("./tv");
 
 const app = express();
 
@@ -24,7 +24,8 @@ app.get("/alive", (req, res) => {
 app.get("/api/devices", async (req, res) => {
   // get devices
   try {
-    let tvResponse = await getDevices();
+    const tvResponse = await getDevices();
+    console.log(tvResponse);
     parseResponse(tvResponse); //! this may be too abstracted?
     res.status(200).send({ success: true, data: tvResponse.devices });
   } catch (err) {
@@ -33,12 +34,20 @@ app.get("/api/devices", async (req, res) => {
   }
 });
 
-app.put("/api/devices/:id", async (req, res) => {
+app.put("/api/devices/:device_id", async (req, res) => {
   // update device
 });
 
-app.delete("/api/devices/:id", async (req, res) => {
+app.delete("/api/devices/:device_id", async (req, res) => {
   // delete device
+  try {
+    const tvResponse = await deleteDevice(req.params.device_id);
+    parseResponse(tvResponse); //! this may be too abstracted?
+    res.status(200).send({ success: true, data: tvResponse.devices });
+  } catch (err) {
+    //* err thown by parseResponse()
+    res.status(200).send({ success: false, data: err });
+  }
 });
 
 //* intialize
