@@ -25,7 +25,7 @@ app.get("/api/devices", async (req, res) => {
   // get devices
   try {
     const tvResponse = await getDevices();
-    console.log(tvResponse);
+    // console.log(tvResponse);
     parseResponse(tvResponse); //! this may be too abstracted?
     res.status(200).send({ success: true, data: tvResponse.devices });
   } catch (err) {
@@ -40,14 +40,19 @@ app.put("/api/devices/:device_id", async (req, res) => {
 
 app.delete("/api/devices/:device_id", async (req, res) => {
   // delete device
-  try {
-    const tvResponse = await deleteDevice(req.params.device_id);
-    parseResponse(tvResponse); //! this may be too abstracted?
-    res.status(200).send({ success: true, data: tvResponse.devices });
-  } catch (err) {
-    //* err thown by parseResponse()
-    res.status(200).send({ success: false, data: err });
+  //! DELETE does not return content (tvRespons = json = content),
+  //! so if there is content, it's an error that needs to be parsed
+  // try {
+  const tvResponse = await deleteDevice(req.params.device_id);
+  if (tvResponse.body) {
+    parseResponse(tvResponse.json()); //! this may be too abstracted?
   }
+  //   res.status(200).send({ success: true });
+  // } catch (err) {
+  //   //* err thown by parseResponse()
+  //   res.status(200).send({ success: false, data: err });
+  // }
+  res.status(200).send({ success: true });
 });
 
 //* intialize

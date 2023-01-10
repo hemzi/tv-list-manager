@@ -14,13 +14,14 @@ async function deleteDevice(device_id) {
     method: "DELETE",
     headers: { Authorization: `Bearer ${apiKey}` },
   });
-  return await res.json();
+  return await res;
 }
 
 //TODO: need to log unknown error json
 function parseResponse(response) {
   if (response.hasOwnProperty("error")) {
-    console.log(response.error_description);
+    // console.log(response);
+    console.log("parseResponse:", response);
     switch (response.error_code) {
       case 2:
         throw new Error("Server's TeamViewer api key is invalid/expired.");

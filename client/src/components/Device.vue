@@ -11,7 +11,7 @@
     <!-- <input type="text" v-model="device.alias"> -->
     <span v-if="checkOfflinePeriod(device.last_seen) || (device.online_state === 'Offline' && !device.last_seen)">
       <span v-if="checkOfflinePeriod(device.last_seen)">[{{ formatDate(device.last_seen) }}]</span>
-      <i class="fa-solid fa-trash"></i>
+      <a href="#" @click.prevent="requestDelete(device)"><i class="fa-solid fa-trash"></i></a>
     </span>
   </div>
 </template>
@@ -24,9 +24,11 @@ import fixName from '@/composables/fixName';
 
 export default {
   props: ['device'],
-  setup() {
-
-    return { formatDate, checkOfflinePeriod, fixName }
+  setup(props, context) {
+    function requestDelete(device) {
+      context.emit('requestDelete', device)
+    }
+    return { formatDate, checkOfflinePeriod, fixName, requestDelete }
   }
 }
 </script>
